@@ -11,19 +11,34 @@ import BikeCard from "../components/BikeCard";
 function Results() {
   // fetch data
 
-  const { currentList } = useSelector((state) => state.base);
+  const { publicationsList } = useSelector((state) => state.base);
 
-  currentList?.map((item) => <p>{item.user}</p>);
+  console.log( "publicationsList is ", publicationsList );
 
-  // find search term
+  publicationsList?.map((item) => (
+    <p>{item.user}</p>
+  ))
+
+// find search term
   const location = useLocation();
 
   // filter by search term
   const value = location.search.substring(1);
 
-  const bikeList = currentList.filter(function (x) {
-    return x.address === value;
-  });
+
+  // Si usuario puso algo
+
+  var bikeList = publicationsList.filter(function(x) {
+    return x.address == value;
+  })
+
+  console.log("filteredlist is", bikeList);
+
+  // Error que usuario no haya puesto nada, mostrar todo
+
+  if (value=="") {
+    bikeList = publicationsList
+  }
 
   return (
     <div className="App">
