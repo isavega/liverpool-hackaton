@@ -1,10 +1,3 @@
-import ReactDOM from "react-dom/client";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Router,
-} from "react-router-dom";
 import Button from '@mui/material/Button';
 
 

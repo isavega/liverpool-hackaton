@@ -1,16 +1,14 @@
-import ReactDOM from "react-dom/client";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Router,
-} from "react-router-dom";
 import Button from '@mui/material/Button';
+import { useLocation } from "react-router-dom";
 
 
 // Renders the bike results view
 
-function Resultados() {
+function Results() {
+
+  const location = useLocation();
+  console.log("location is ", location.search.substring(1));
+
   return (
     <div className="App">
        <header className="App-header">
@@ -22,4 +20,4 @@ function Resultados() {
   );
 }
 
-export default Resultados;
+export default Results;

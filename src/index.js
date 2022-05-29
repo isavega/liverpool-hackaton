@@ -11,7 +11,7 @@ import {
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import LoadResults from './components/LoadResults';
-import Resultados from "./views/resultados";
+import Results from "./views/results";
 import Publicar from "./views/publicar";
 
 
@@ -23,7 +23,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="resultados" element={<Resultados />}/>
+          <Route path="results" element={<Results />}/>
           <Route path="publicar" element={<Publicar />}/>
         </Route>
       </Routes>       
