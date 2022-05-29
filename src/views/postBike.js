@@ -16,6 +16,7 @@ const PostBike = () => {
   const [address, setAddress] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [img_url, setImgUrl] = useState("");
   const dispatch = useDispatch();
 
   const submitHandler = () => {
@@ -28,12 +29,18 @@ const PostBike = () => {
         available: true,
         description: description,
         title: postTitle,
+        img_url: img_url
       })
     );
   };
 
-  const submitImage = (data) => {
-    dispatch(createImageThunk(data));
+  const submitImage = async (data) => {
+    console.log(data.target.files[0]);
+    let resp = dispatch(createImageThunk(data.target.files[0]));
+    resp.then(function (info){
+      console.log(info.payload['image_url']);
+      setImgUrl(info.payload['image_url']);
+    });
   };
 
   return (
@@ -84,7 +91,7 @@ const PostBike = () => {
       </div>
       <Button variant="contained" component="label">
         Foto
-        <input type="file" hidden />
+        <input type="file" hidden onChange={submitImage} />
       </Button>
       <Button variant="contained" onClick={submitHandler}>
         Publicar

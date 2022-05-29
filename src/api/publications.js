@@ -31,6 +31,7 @@ export const postPublications = async (data) => {
         available: data.available,
         description: data.description,
         title: data.title,
+        img_url: data.img_url
       }),
     }
   );

@@ -1,18 +1,16 @@
 export const postImage = async (data) => {
   let form = new FormData();
-  form.append("triangle.obj", new Blob([data]));
+  form.append("img_file", data);
+  form.append("type", data.type);
   const response = await fetch(
-    "http://rent-bike-go.herokuapp.com/upload_upload_code_to_s3_post",
+    "https://rent-bike-go.herokuapp.com/upload_code_to_s3",
     {
-      method: "post",
+      method: "POST",
       headers: {
-        accept: "application/json",
-        "Content-Type": "multipart/form-data",
-        Prefer: "return=representation",
-      },
+        accept: "application/json"},
       body: form,
     }
   );
-  const postResponse = await response.blob();
+  const postResponse = await response.json();
   return postResponse;
 };
