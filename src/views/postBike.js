@@ -3,7 +3,10 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
-import { createPublicationsThunk } from "../store/base/baseSlice";
+import {
+  createPublicationsThunk,
+  createImageThunk,
+} from "../store/base/baseSlice";
 
 // Renders the publishing new bike view
 
@@ -13,6 +16,7 @@ const PostBike = () => {
   const [address, setAddress] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
+  const [img_url, setImgUrl] = useState("");
   const dispatch = useDispatch();
 
   const submitHandler = () => {
@@ -24,12 +28,18 @@ const PostBike = () => {
         available: true,
         description: description,
         title: postTitle,
+        img_url: img_url,
       })
     );
   };
 
-  const nameHandler = (event) => {
-    setUserName(event.target.value);
+  const submitImage = async (data) => {
+    console.log(data.target.files[0]);
+    let resp = dispatch(createImageThunk(data.target.files[0]));
+    resp.then(function (info) {
+      console.log(info.payload["image_url"]);
+      setImgUrl(info.payload["image_url"]);
+    });
   };
 
   return (
@@ -47,7 +57,7 @@ const PostBike = () => {
           id="outlined-required"
           label="Tu nombre :)"
           value={userName}
-          onChange={nameHandler}
+          onChange={(input) => setUserName(input.target.value)}
         />
         <TextField
           required
@@ -78,6 +88,10 @@ const PostBike = () => {
           onChange={(input) => setDescription(input.target.value)}
         />
       </div>
+      <Button variant="contained" component="label">
+        Foto
+        <input type="file" hidden onChange={submitImage} />
+      </Button>
       <Button variant="contained" onClick={submitHandler}>
         Publicar
       </Button>

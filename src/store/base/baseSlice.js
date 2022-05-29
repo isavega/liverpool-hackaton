@@ -3,6 +3,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { getPublications, postPublications } from "../../api/publications";
+import { postImage } from "../../api/postImage";
 
 const initialState = {
   publicationsList: [],
@@ -22,6 +23,14 @@ const createPublications = createAsyncThunk(
   "postPublications",
   async (payload, _thunkAPI) => {
     const response = await postPublications(payload);
+    return response;
+  }
+);
+
+const createImage = createAsyncThunk(
+  "postPublications",
+  async (payload, _thunkAPI) => {
+    const response = await postImage(payload);
     return response;
   }
 );
@@ -78,10 +87,16 @@ const baseSlice = createSlice({
       state.error = false;
       state.loading = true;
     },
+    [createImage.fulfilled]: (state, action) => {
+      console.log("POST IMAGE EXITO");
+      state.error = false;
+      state.loading = false;
+    },
   },
 });
 
 export const { setPublicationsList, setLoading, setError } = baseSlice.actions;
 export const fetchPublicationsThunk = fetchPublications;
 export const createPublicationsThunk = createPublications;
+export const createImageThunk = createImage;
 export const baseReducer = baseSlice.reducer;
