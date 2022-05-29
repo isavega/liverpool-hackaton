@@ -16,7 +16,6 @@ const PostBike = () => {
   const dispatch = useDispatch();
 
   const submitHandler = () => {
-    console.log("Publicando", userName);
     dispatch(
       createPublicationsThunk({
         user: userName,
@@ -79,10 +78,6 @@ const PostBike = () => {
           onChange={(input) => setDescription(input.target.value)}
         />
       </div>
-      <Button variant="contained" component="label">
-        Foto
-        <input type="file" hidden />
-      </Button>
       <Button variant="contained" onClick={submitHandler}>
         Publicar
       </Button>
