@@ -80,7 +80,11 @@ const App = (classes) => {
               <Box sx={{ my: 3, mx: 6 }} p="5%">
                 <Avatar
                   alt="default"
-                  src="https://orangebikes.net/wp-content/uploads/2020/05/Mejores-Marcas-de-Bicicleta-del-Mundo-730x400.jpg"
+                  src={
+                    item.img_url
+                      ? item.img_url
+                      : "https://orangebikes.net/wp-content/uploads/2020/05/Mejores-Marcas-de-Bicicleta-del-Mundo-730x400.jpg"
+                  }
                   sx={{ width: 730, height: 400 }}
                   variant="square"
                   style={{
@@ -90,6 +94,11 @@ const App = (classes) => {
                 <Grid item>
                   <Typography gutterBottom variant="h4" component="div">
                     {item.title ? item.title : "Se arrienda Bicicleta"}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {item.address}
                   </Typography>
                 </Grid>
                 <Grid item>
