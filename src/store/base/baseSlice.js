@@ -2,21 +2,26 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import getPublications from "../../api/publications";
+import { getPublications, postPublications } from "../../api/publications";
 
 const initialState = {
-  currentList: [],
+  publicationsList: [],
   error: "",
   loading: false,
 };
 
 const fetchPublications = createAsyncThunk(
-  "poke/fetchPublications",
+  "fetchPublications",
   async (payload, _thunkAPI) => {
-    console.log("ENTRE");
     const response = await getPublications(payload);
-    console.log("DATA: ", response);
-    /* return response.data; */
+    return response;
+  }
+);
+
+const createPublications = createAsyncThunk(
+  "postPublications",
+  async (payload, _thunkAPI) => {
+    const response = await postPublications(payload);
     return response;
   }
 );
@@ -25,8 +30,8 @@ const baseSlice = createSlice({
   name: "base",
   initialState,
   reducers: {
-    setCurrentList: (state, action) => {
-      state.currentList = action.payload;
+    setPublicationsList: (state, action) => {
+      state.publicationsList = action.payload;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
@@ -37,27 +42,46 @@ const baseSlice = createSlice({
   },
   extraReducers: {
     [fetchPublications.fulfilled]: (state, action) => {
-      console.log("EXITO");
-      console.log(action);
-      state.currentList = action.payload;
-      console.log("LISTA: ", state.currentList);
+      console.log("GET EXITO");
+
+      state.publicationsList = action.payload;
+
       state.error = false;
       state.loading = false;
     },
     [fetchPublications.rejected]: (state) => {
-      console.log("FALLO");
-      state.currentList = [];
+      console.log("GET FALLO");
+      state.publicationsList = [];
       state.loading = false;
       state.error = true;
     },
     [fetchPublications.pending]: (state) => {
-      console.log("PENDIENTE");
+      console.log("GET PENDIENTE");
+      state.error = false;
+      state.loading = true;
+    },
+    [createPublications.fulfilled]: (state, action) => {
+      console.log("POST EXITO");
+
+      state.publicationsList.unshift(action.payload);
+      state.error = false;
+      state.loading = false;
+    },
+    [createPublications.rejected]: (state) => {
+      console.log("POST FALLO");
+      state.publicationsList = [];
+      state.loading = false;
+      state.error = true;
+    },
+    [createPublications.pending]: (state) => {
+      console.log("POST PENDIENTE");
       state.error = false;
       state.loading = true;
     },
   },
 });
 
-export const { setCurrentList, setLoading, setError } = baseSlice.actions;
+export const { setPublicationsList, setLoading, setError } = baseSlice.actions;
 export const fetchPublicationsThunk = fetchPublications;
+export const createPublicationsThunk = createPublications;
 export const baseReducer = baseSlice.reducer;
