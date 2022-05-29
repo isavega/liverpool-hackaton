@@ -21,7 +21,6 @@ const fetchPublications = createAsyncThunk(
 const createPublications = createAsyncThunk(
   "postPublications",
   async (payload, _thunkAPI) => {
-    console.log("PAYLOAD PARA EL POST: ", payload);
     const response = await postPublications(payload);
     return response;
   }
@@ -44,9 +43,9 @@ const baseSlice = createSlice({
   extraReducers: {
     [fetchPublications.fulfilled]: (state, action) => {
       console.log("GET EXITO");
-      console.log(action);
+
       state.publicationsList = action.payload;
-      console.log("LISTA: ", state.publicationsList);
+
       state.error = false;
       state.loading = false;
     },
@@ -63,7 +62,7 @@ const baseSlice = createSlice({
     },
     [createPublications.fulfilled]: (state, action) => {
       console.log("POST EXITO");
-      console.log(action);
+
       state.publicationsList.unshift(action.payload);
       state.error = false;
       state.loading = false;
