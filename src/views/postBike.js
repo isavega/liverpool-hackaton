@@ -3,7 +3,10 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
-import { createPublicationsThunk } from "../store/base/baseSlice";
+import {
+  createPublicationsThunk,
+  createImageThunk,
+} from "../store/base/baseSlice";
 
 // Renders the publishing new bike view
 
@@ -29,8 +32,8 @@ const PostBike = () => {
     );
   };
 
-  const nameHandler = (event) => {
-    setUserName(event.target.value);
+  const submitImage = (data) => {
+    dispatch(createImageThunk(data));
   };
 
   return (
@@ -48,7 +51,7 @@ const PostBike = () => {
           id="outlined-required"
           label="Tu nombre :)"
           value={userName}
-          onChange={nameHandler}
+          onChange={(input) => setUserName(input.target.value)}
         />
         <TextField
           required
