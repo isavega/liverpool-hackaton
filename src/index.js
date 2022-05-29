@@ -1,19 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  BrowserRouter,
-  Outlet,
-  Routes,
-  Route,
-  Router,
-  Link,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import LoadResults from "./components/LoadResults";
-import Resultados from "./views/resultados";
 import PostBike from "./views/postBike";
+import Results from "./views/results";
 
 // added routers
 
@@ -23,15 +15,12 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="resultados" element={<Resultados />} />
           <Route path="publicar" element={<PostBike />} />
+          <Route path="results" element={<Results />} />
         </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
