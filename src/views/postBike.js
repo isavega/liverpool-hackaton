@@ -20,7 +20,6 @@ const PostBike = () => {
   const dispatch = useDispatch();
 
   const submitHandler = () => {
-    console.log("Publicando", userName);
     dispatch(
       createPublicationsThunk({
         user: userName,
@@ -29,7 +28,7 @@ const PostBike = () => {
         available: true,
         description: description,
         title: postTitle,
-        img_url: img_url
+        img_url: img_url,
       })
     );
   };
@@ -37,9 +36,9 @@ const PostBike = () => {
   const submitImage = async (data) => {
     console.log(data.target.files[0]);
     let resp = dispatch(createImageThunk(data.target.files[0]));
-    resp.then(function (info){
-      console.log(info.payload['image_url']);
-      setImgUrl(info.payload['image_url']);
+    resp.then(function (info) {
+      console.log(info.payload["image_url"]);
+      setImgUrl(info.payload["image_url"]);
     });
   };
 

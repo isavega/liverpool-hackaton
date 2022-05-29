@@ -52,9 +52,9 @@ const baseSlice = createSlice({
   extraReducers: {
     [fetchPublications.fulfilled]: (state, action) => {
       console.log("GET EXITO");
-      console.log(action);
+
       state.publicationsList = action.payload;
-      console.log("LISTA: ", state.publicationsList);
+
       state.error = false;
       state.loading = false;
     },
@@ -71,7 +71,7 @@ const baseSlice = createSlice({
     },
     [createPublications.fulfilled]: (state, action) => {
       console.log("POST EXITO");
-      console.log(action);
+
       state.publicationsList.unshift(action.payload);
       state.error = false;
       state.loading = false;
