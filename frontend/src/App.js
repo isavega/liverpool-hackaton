@@ -122,8 +122,16 @@ const App = (classes) => {
           ))}
         </div>
         <br></br>
-        <Button color="warning" size="large">
-          <Link to="/publicar">Publicar</Link>
+        <Button color="primary" size="large">
+          <Link
+            style={{
+              fontSize: 55,
+              color: "#0BE88A",
+            }}
+            to="/publicar"
+          >
+            Publicar mi anuncio
+          </Link>
         </Button>
       </div>
       <Outlet />
