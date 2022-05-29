@@ -1,30 +1,38 @@
-import logo from './assets/logo.svg';
-import React, { useState } from 'react';
-import {
-  Outlet,
-  Link,
-} from "react-router-dom";
-import { TextField,
-  AppBar,
-  Button, } from '@mui/material';
-import CitySearchButton from "./components/CitySearchButton";
-import './App.css';
 
-// pass city to resultados using state DONE
-// pull resultados 
-// render cards
-// filter resultados by city
+import React, { useEffect } from "react";
+import { Provider, useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import { fetchPublicationsThunk } from "./store/base/baseSlice";
+import store from "../src/store/index";
+import Button from "@mui/material/Button";
+import "./App.css";
+import { Outlet, Link } from "react-router-dom";
+import logo from "./assets/logo.svg";
 
-function App() {
+const AppWrapper = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
+
+const App = () => {
 
   // set state for city search
 
   const [searchCity, setSearchCity] = useState("") 
 
   console.log("city is", searchCity)
+  
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchPublicationsThunk());
+  }, []);
 
-// main render
+  const { currentList, loading, error } = useSelector((state) => state.base);
+
   return (
     <div className="App">
        <header className="App-header">
@@ -40,8 +48,8 @@ function App() {
           <Outlet />
 
        </header> 
-      </div>
+    </div>
   );
-}
+};
 
-export default App;
+export default AppWrapper;

@@ -6,12 +6,12 @@ import Button from '@mui/material/Button';
 function Publicar() {
   return (
     <div className="App">
-       <header className="App-header">
-          <div>
-            <Button>PUBLICAR</Button> 
-          </div>
-       </header>        
-      </div>
+      <header className="App-header">
+        <div>
+          <Button>PUBLICAR</Button>
+        </div>
+      </header>
+    </div>
   );
 }
 

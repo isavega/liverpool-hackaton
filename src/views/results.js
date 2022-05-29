@@ -11,12 +11,12 @@ function Results() {
 
   return (
     <div className="App">
-       <header className="App-header">
-          <div>
-            <Button>RESULTADOS</Button> 
-          </div>
-       </header>        
-      </div>
+      <header className="App-header">
+        <div>
+          <Button>RESULTADOS</Button>
+        </div>
+      </header>
+    </div>
   );
 }
 

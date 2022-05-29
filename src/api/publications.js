@@ -1,30 +1,15 @@
-import http from "./http";
-
-const getPublications = async ({
-  id,
-  user,
-  title,
-  created_at,
-  adress,
-  price,
-  available,
-  description,
-  img_url,
-}) => {
-  let baseQuery = `character?page=${page}`;
-  if (status && status.length >= 1) {
-    baseQuery += `&status=${status}`;
-  }
-  if (species && species.length >= 1) {
-    baseQuery += `&species=${species}`;
-  }
-  if (gender && gender.length >= 1) {
-    baseQuery += `&gender=${gender}`;
-  }
-  if (name && name.length >= 1) {
-    baseQuery += `&name=${name}`;
-  }
-  return http.get(baseQuery);
+const getPublications = async () => {
+  const response = await fetch(
+    "https://oymdiutldfewjvmpkgam.supabase.co/rest/v1/available_bikes?select=*",
+    {
+      headers: {
+        apikey: process.env.REACT_APP_API_KEY,
+        Authorization: process.env.REACT_APP_AUTHORIZATION,
+      },
+    }
+  );
+  const data = await response.json();
+  return data;
 };
 
 export default getPublications;
