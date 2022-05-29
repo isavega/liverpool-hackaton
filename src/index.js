@@ -7,13 +7,13 @@ import {
   Route,
   Router,
   Link,
-} from "react-router-dom";import "./index.css";
+} from "react-router-dom";
+import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import LoadResults from './components/LoadResults';
+import LoadResults from "./components/LoadResults";
 import Resultados from "./views/resultados";
-import Publicar from "./views/publicar";
-
+import PostBike from "./views/postBike";
 
 // added routers
 
@@ -23,15 +23,13 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="resultados" element={<Resultados />}/>
-          <Route path="publicar" element={<Publicar />}/>
+          <Route path="resultados" element={<Resultados />} />
+          <Route path="publicar" element={<PostBike />} />
         </Route>
-      </Routes>       
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
-
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
