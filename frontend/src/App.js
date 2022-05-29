@@ -122,7 +122,7 @@ const App = (classes) => {
           ))}
         </div>
         <br></br>
-        <Button variant="outlined" color="warning">
+        <Button color="warning" size="large">
           <Link to="/publicar">Publicar</Link>
         </Button>
       </div>
