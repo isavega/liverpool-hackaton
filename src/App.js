@@ -38,6 +38,7 @@ const App = () => {
     <div className="App">
        <header className="App-header">
        <Link to='/'><img src={logo}/></Link>
+        <div className="landing">Arrienda bicicletas fácil</div>
           <div>
             <div className='row'>
               <TextField  onChange={event =>setSearchCity(event.target.value)} id="outlined-basic" label="Ciudad" variant="outlined" />

@@ -12,11 +12,11 @@ function Results() {
 
 // fetch data
 
-  const { currentList } = useSelector((state) => state.base);
+  const { publicationsList } = useSelector((state) => state.base);
 
-  console.log( "currentList is ", currentList );
+  console.log( "publicationsList is ", publicationsList );
 
-  currentList?.map((item) => (
+  publicationsList?.map((item) => (
     <p>{item.user}</p>
   ))
 
@@ -27,11 +27,20 @@ function Results() {
 // filter by search term
   const value = location.search.substring(1)
 
-  const bikeList = currentList.filter(function(x) {
-    return x.address== value;
+
+  // Si usuario puso algo
+
+  var bikeList = publicationsList.filter(function(x) {
+    return x.address == value;
   })
 
   console.log("filteredlist is", bikeList);
+
+  // Error que usuario no haya puesto nada, mostrar todo
+
+  if (value=="") {
+    bikeList = publicationsList
+  }
 
   return (
     <div className="App">
