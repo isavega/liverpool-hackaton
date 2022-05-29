@@ -1,7 +1,27 @@
+import React, { useState, useEffect } from "react";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import logo from "./logo.svg";
 import "./App.css";
+import { fetchPublicationsThunk } from "./store/base/baseSlice";
+import store from "../src/store/index";
 
-function App() {
+const AppWrapper = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPublicationsThunk());
+  });
+
+  const { currentList, loading, error } = useSelector((state) => state.base);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,17 +29,12 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {currentList?.map((item) => (
+          <p>{item.user}</p>
+        ))}
       </header>
     </div>
   );
-}
+};
 
-export default App;
+export default AppWrapper;
